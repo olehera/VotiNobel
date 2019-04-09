@@ -8,7 +8,6 @@ public class Esame {
 	private int crediti;
 
 	public Esame() {
-
 	}
 
 	public Esame(String codins, String nomecorso, int crediti, int voto) {
@@ -77,7 +76,7 @@ public class Esame {
 
 	@Override
 	public String toString() {
-		return String.format("codins: %-6s  crediti: %-2d  voto: %-2d  %s", codins, crediti, voto, nomeCorso);
+		return String.format("codins: %-6s  crediti: %-2d  voto: %-2d  %s \n", codins, crediti, voto, nomeCorso);
 	}
 
 }

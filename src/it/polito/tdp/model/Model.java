@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import it.polito.tdp.dao.EsameDAO;
+
 public class Model {
 	
 	// esami letti dal database
@@ -14,10 +16,16 @@ public class Model {
 	private List<Esame> best;
 	private double media_best;
 	
+	public Model() {
+		EsameDAO dao = new EsameDAO();
+		this.esami = dao.getTuttiEsami();
+	}
+	
 	/**
-	 * Trova la combinazione di corsi avente la somma di crediti che abbia la media dei voti massima
+	 * Trova la combinazione di corsi avente la somma dei crediti richiesta, che abbia la media dei voti massima.
 	 * @param numeroCrediti
-	 * @return l'elenco dei corsi ottimale, oppure {@code null} alcuna combinazione di corsi che assomma al numero esatto di crediti.
+	 * @return l'elenco dei corsi ottimale, 
+	 * oppure {@code null} se non esiste alcuna combinazione di corsi avente la somma richiesta.
 	 */
 	public List<Esame> calcolaSottoinsiemeEsami(int numeroCrediti) {
 		

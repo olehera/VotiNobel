@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 
 public class VotiNobelController {
 
-	Model model;
+	private Model model;
 	
     @FXML
     private ResourceBundle resources;
@@ -33,13 +33,21 @@ public class VotiNobelController {
 
     @FXML
     void doCalcolaCombinazione(ActionEvent event) {
+    	int numeroCrediti = 0;
+    	
     		try {
-    			int numeroCrediti = Integer.parseInt(txtInput.getText());
-    			List<Esame> voti = model.calcolaSottoinsiemeEsami(numeroCrediti);
-    			txtResult.setText(voti.toString());
+    			numeroCrediti = Integer.parseInt(txtInput.getText().trim());
     		} catch (NumberFormatException e) {
     			txtResult.setText("Inserire un numero di crediti > 0");
     		}
+    		
+    		List<Esame> voti = model.calcolaSottoinsiemeEsami(numeroCrediti);
+    		
+    		if (voti != null) {
+    			txtResult.setText(voti.toString());
+    		} else
+    			txtResult.setText("Non c'è alcuna combinazione di corsi avente la somma di crediti = "+numeroCrediti);
+    		
     }
 
     @FXML
@@ -57,7 +65,6 @@ public class VotiNobelController {
     }
 
 	public void setModel(Model model) {
-		
 		this.model = model;
 	}
 }
